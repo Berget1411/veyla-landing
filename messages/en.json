@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Home"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "sv": "Swedish"
+  }
+}
