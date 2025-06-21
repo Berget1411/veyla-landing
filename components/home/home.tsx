@@ -37,10 +37,11 @@ import {
 import { useState } from "react";
 import scrollToSection from "@/lib/scrollToSection";
 import Link from "next/link";
-import Image from "next/image";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { useAnalytics } from "@/lib/analytics";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { usePerformance } from "@/hooks/usePerformance";
 import { CookieBanner } from "@/components/ui/cookie-banner";
 
 // People data for animated tooltip
@@ -824,12 +825,15 @@ function SupportedBy() {
           className='flex justify-center'
         >
           <div>
-            <Image
+            <OptimizedImage
               src='/images/innovation.png'
               alt='KTH Innovation'
               width={600}
               height={600}
               className='object-contain w-full h-full'
+              priority={false}
+              quality={90}
+              sizes='(max-width: 768px) 100vw, 600px'
             />
           </div>
         </motion.div>
@@ -925,6 +929,9 @@ function Blog() {
 export function Home() {
   // Initialize scroll tracking for secondary KPI
   useScrollTracking();
+
+  // Initialize performance monitoring
+  usePerformance();
 
   return (
     <div>

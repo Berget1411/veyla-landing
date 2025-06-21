@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { Provider } from "@/components/provider";
 import PlausibleProvider from "next-plausible";
+import { WebVitals } from "@/components/performance/WebVitals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,13 +65,32 @@ export default async function RootLayout({
         <link rel='alternate' hrefLang='sv' href='https://veyla.nu' />
         <link rel='alternate' hrefLang='en' href='https://veyla.nu/en' />
         <link rel='alternate' hrefLang='x-default' href='https://veyla.nu' />
+
+        {/* Font preloading for better performance */}
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap'
+          rel='stylesheet'
+        />
+
+        {/* Preload critical resources */}
+        <link rel='preload' href='/images/innovation.png' as='image' />
+        <link rel='dns-prefetch' href='https://plausible.io' />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PlausibleProvider domain='veyla-landing.vercel.app'>
           <NextIntlClientProvider messages={messages}>
-            <Provider>{children}</Provider>
+            <Provider>
+              <WebVitals />
+              {children}
+            </Provider>
           </NextIntlClientProvider>
         </PlausibleProvider>
       </body>

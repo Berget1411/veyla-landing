@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap");
+/* Roboto font will be loaded via preload in layout.tsx */
 @import "tailwindcss";
 @import "tw-animate-css";
 
