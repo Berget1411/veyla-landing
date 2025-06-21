@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -402,31 +402,134 @@ function HowItWorks() {
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto'>
           {howItWorksSteps.map((step, index) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className='relative group'
-            >
-              <div className='absolute -inset-4 rounded-xl bg-[hsl(var(--accent-veyla))] opacity-0 group-hover:opacity-10 transition-opacity' />
-              <div className='relative space-y-4 p-4'>
-                <div className='w-12 h-12 rounded-full bg-[hsl(var(--accent-veyla))] bg-opacity-20 flex items-center justify-center'>
-                  <step.icon className='w-6 h-6 text-[#0ea47a]' />
+            <Card key={step.number}>
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className='relative group'
+              >
+                <div className='absolute -inset-4 rounded-xl bg-[hsl(var(--accent-veyla))] opacity-0 group-hover:opacity-10 transition-opacity' />
+                <div className='relative space-y-4 p-4'>
+                  <div className='w-12 h-12 rounded-full bg-[hsl(var(--accent-veyla))] bg-opacity-20 flex items-center justify-center'>
+                    <step.icon className='w-6 h-6 text-[#0ea47a]' />
+                  </div>
+                  <div className='space-y-2'>
+                    <h3 className='text-xl font-semibold'>{step.title}</h3>
+                    <p className='text-muted-foreground leading-relaxed'>
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <div className='space-y-2'>
-                  <h3 className='text-xl font-semibold'>{step.title}</h3>
-                  <p className='text-muted-foreground leading-relaxed'>
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Card>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+// Pricing Details Component
+function PricingDetails({ t }: { t: (key: string) => string }) {
+  return (
+    <div className='w-full p-6 bg-gradient-to-br from-gray-50 to-emerald-50 rounded-lg border border-emerald-100'>
+      <h4 className='font-bold text-base mb-4 text-gray-900'>
+        {t("pricing.details.title")}
+      </h4>
+
+      {/* AI & Juridisk expertis */}
+      <div className='mb-6'>
+        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+          <MessageSquare className='h-4 w-4' />
+          {t("pricing.details.aiExpertise.title")}
+        </h5>
+        <ul className='space-y-2 text-sm text-gray-700'>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.aiExpertise.item1")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.aiExpertise.item2")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.aiExpertise.item3")}</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Dokumenthantering */}
+      <div className='mb-6'>
+        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+          <FileText className='h-4 w-4' />
+          {t("pricing.details.documentHandling.title")}
+        </h5>
+        <ul className='space-y-2 text-sm text-gray-700'>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.documentHandling.item1")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.documentHandling.item2")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.documentHandling.item3")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.documentHandling.item4")}</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Support & Säkerhet */}
+      <div className='mb-6'>
+        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+          <Shield className='h-4 w-4' />
+          {t("pricing.details.supportSecurity.title")}
+        </h5>
+        <ul className='space-y-2 text-sm text-gray-700'>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.supportSecurity.item1")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.supportSecurity.item2")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.supportSecurity.item3")}</span>
+          </li>
+          <li className='flex items-start gap-2'>
+            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+            <span>{t("pricing.details.supportSecurity.item4")}</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Värdeproposition */}
+      <div className='bg-white p-4 rounded-lg border border-emerald-200'>
+        <div className='flex items-center gap-2 mb-2'>
+          <div className='w-2 h-2 bg-[#0ea47a] rounded-full'></div>
+          <span className='font-semibold text-sm text-gray-900'>
+            {t("pricing.details.valueProposition.title")}
+          </span>
+        </div>
+        <ul className='text-xs text-gray-600 space-y-1'>
+          <li>• {t("pricing.details.valueProposition.item1")}</li>
+          <li>• {t("pricing.details.valueProposition.item2")}</li>
+          <li>• {t("pricing.details.valueProposition.item3")}</li>
+          <li>• {t("pricing.details.valueProposition.item4")}</li>
+        </ul>
+      </div>
+    </div>
   );
 }
 
@@ -515,144 +618,32 @@ function Pricing() {
                   variant='outline'
                   className='w-full border-[#0ea47a] text-[#0ea47a] hover:bg-[#0ea47a] hover:text-white'
                   onClick={() => {
-                    const newState = !showDetails;
-                    setShowDetails(newState);
-                    trackPricingToggle(newState ? "show" : "hide");
-                    trackSecondaryCTA("pricing_details", "pricing_card");
+                    try {
+                      const newState = !showDetails;
+                      setShowDetails(newState);
+                      trackPricingToggle(newState ? "show" : "hide");
+                      trackSecondaryCTA("pricing_details", "pricing_card");
+                    } catch (error) {
+                      console.warn("Error toggling pricing details:", error);
+                    }
                   }}
                 >
-                  {showDetails ? "Dölj detaljer" : t("pricing.ctaSecondary")}
+                  {showDetails
+                    ? t("pricing.ctaSecondaryHide")
+                    : t("pricing.ctaSecondary")}
                 </Button>
 
                 {/* Expandable details section */}
-                <AnimatePresence>
+                <AnimatePresence mode='wait'>
                   {showDetails && (
                     <motion.div
+                      key='pricing-details'
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className='w-full p-6 bg-gradient-to-br from-gray-50 to-emerald-50 rounded-lg border border-emerald-100'
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <h4 className='font-bold text-base mb-4 text-gray-900'>
-                        Komplett paket - Allt som ingår för 1999 kr:
-                      </h4>
-
-                      {/* AI & Juridisk expertis */}
-                      <div className='mb-6'>
-                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
-                          <MessageSquare className='h-4 w-4' />
-                          AI-Juridisk Expertis
-                        </h5>
-                        <ul className='space-y-2 text-sm text-gray-700'>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Personlig AI-jurist som analyserar just ditt
-                              ärende
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Skräddarsydda rekommendationer baserat på ditt
-                              dödsbo
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Experthjälp med komplicerade tillgångar
-                              (fastigheter, aktier, utländska tillgångar)
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      {/* Dokumenthantering */}
-                      <div className='mb-6'>
-                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
-                          <FileText className='h-4 w-4' />
-                          Dokumenthantering & Inlämning
-                        </h5>
-                        <ul className='space-y-2 text-sm text-gray-700'>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Automatisk ifyllning av alla nödvändiga dokument
-                              (K4, K5, K6)
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Digital signering med BankID för alla arvingar
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Direktinlämning till Skatteverket - inga
-                              postningar
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Uppföljning av ärendestatus hos myndigheter
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      {/* Support & Säkerhet */}
-                      <div className='mb-6'>
-                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
-                          <Shield className='h-4 w-4' />
-                          Support & Säkerhet
-                        </h5>
-                        <ul className='space-y-2 text-sm text-gray-700'>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Obegränsad support via e-post under hela processen
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              End-to-end kryptering av all känslig data
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Svenska servrar och GDPR-kompatibel datahantering
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-2'>
-                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                            <span>
-                              Tillgång för hela familjen - inga extra avgifter
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      {/* Värdeproposition */}
-                      <div className='bg-white p-4 rounded-lg border border-emerald-200'>
-                        <div className='flex items-center gap-2 mb-2'>
-                          <div className='w-2 h-2 bg-[#0ea47a] rounded-full'></div>
-                          <span className='font-semibold text-sm text-gray-900'>
-                            Jämfört med traditionell juridisk hjälp:
-                          </span>
-                        </div>
-                        <ul className='text-xs text-gray-600 space-y-1'>
-                          <li>• Traditionell advokat: 15 000 - 30 000 kr</li>
-                          <li>• Veyla: 1 999 kr (90% billigare)</li>
-                          <li>• Tid: Veckor istället för månader</li>
-                          <li>• Transparent fast pris - inga dolda avgifter</li>
-                        </ul>
-                      </div>
+                      <PricingDetails t={t} />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -1001,37 +992,39 @@ function SupportedBy() {
 // Blog Component
 function Blog() {
   const t = useTranslations("home");
+  const locale = useLocale();
   const { trackBlogClick } = useAnalytics();
 
-  // Use real blog posts from Markdown files
-  const blogPosts = [
+  // Blog posts data with i18n support - these will be mapped to actual blog posts
+  const blogPostsConfig = [
     {
-      title:
-        "Komplett guide: Bouppteckning efter dödsfall - Vad du behöver veta",
-      excerpt:
-        "En omfattande guide som hjälper dig att förstå processen för bouppteckning efter dödsfall. Lär dig om tidsfrister, dokument och praktiska steg.",
-      href: "/blog/guide-bouppteckning-efter-dodsfall",
+      slugSv: "guide-bouppteckning-efter-dodsfall",
+      slugEn: "estate-inventory-guide-after-death",
       publishedAt: "2024-01-15",
       readingTime: "8 min",
     },
     {
-      title:
-        "Digitala tillgångar i dödsbo - Så hanterar du kryptovalutor och online-konton",
-      excerpt:
-        "Allt fler lämnar efter sig digitala tillgångar. Lär dig hur du identifierar och hanterar kryptovalutor, online-konton och digitala investeringar i bouppteckningen.",
-      href: "/blog/digitala-tillgangar-dodsbo",
+      slugSv: "digitala-tillgangar-dodsbo",
+      slugEn: "digital-assets-in-estate",
       publishedAt: "2024-01-20",
       readingTime: "6 min",
     },
     {
-      title: "7 vanliga misstag vid bouppteckning - Så undviker du dyra fel",
-      excerpt:
-        "Lär dig om de vanligaste misstagen som görs vid bouppteckning och hur du undviker dem. Spara tid, pengar och undvik problem med Skatteverket.",
-      href: "/blog/vanliga-misstag-bouppteckning",
+      slugSv: "vanliga-misstag-bouppteckning",
+      slugEn: "common-estate-inventory-mistakes",
       publishedAt: "2024-01-25",
       readingTime: "5 min",
     },
   ];
+
+  // Map to the format expected by the component
+  const blogPosts = blogPostsConfig.map((post, index) => ({
+    title: t(`blog.article${index + 1}.title`),
+    excerpt: t(`blog.article${index + 1}.excerpt`),
+    href: `/blog/${locale === "sv" ? post.slugSv : post.slugEn}`, // Use appropriate slug based on current locale
+    publishedAt: post.publishedAt,
+    readingTime: post.readingTime,
+  }));
 
   return (
     <section className='py-24 relative bg-gray-50' id='blog'>
@@ -1044,10 +1037,10 @@ function Blog() {
           className='text-center space-y-4 mb-16'
         >
           <h2 className='text-3xl md:text-4xl font-bold tracking-tight'>
-            {t("blog.title")}
+            {t("blog.homeTitle")}
           </h2>
           <p className='text-muted-foreground text-lg max-w-2xl mx-auto'>
-            {t("blog.subtitle")}
+            {t("blog.homeSubtitle")}
           </p>
         </motion.div>
 
@@ -1070,7 +1063,7 @@ function Blog() {
                     <div className='flex items-center justify-between mb-2'>
                       <span className='text-xs text-muted-foreground'>
                         {new Date(post.publishedAt).toLocaleDateString(
-                          "sv-SE",
+                          locale === "sv" ? "sv-SE" : "en-US",
                           {
                             year: "numeric",
                             month: "long",
@@ -1096,7 +1089,7 @@ function Blog() {
                       variant='ghost'
                       className='p-0 h-auto text-[#0ea47a] hover:text-[#0a7557]'
                     >
-                      Läs mer
+                      {t("blog.readMore")}
                       <ArrowRight className='ml-1 h-4 w-4' />
                     </Button>
                   </CardFooter>

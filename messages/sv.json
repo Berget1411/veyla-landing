@@ -48,7 +48,38 @@
         "Trygghet & sekretess – svensk data, kryptering"
       ],
       "ctaSecondary": "Visa allt som ingår",
-      "guarantee": "BankID inloggning under utveckling"
+      "ctaSecondaryHide": "Dölj detaljer",
+      "guarantee": "BankID inloggning under utveckling",
+      "details": {
+        "title": "Komplett paket - Allt som ingår för 1999 kr:",
+        "aiExpertise": {
+          "title": "AI-Juridisk Expertis",
+          "item1": "Personlig AI-jurist som analyserar just ditt ärende",
+          "item2": "Skräddarsydda rekommendationer baserat på ditt dödsbo",
+          "item3": "Experthjälp med komplicerade tillgångar (fastigheter, aktier, utländska tillgångar)"
+        },
+        "documentHandling": {
+          "title": "Dokumenthantering & Inlämning",
+          "item1": "Automatisk ifyllning av alla nödvändiga dokument (K4, K5, K6)",
+          "item2": "Digital signering med BankID för alla arvingar",
+          "item3": "Direktinlämning till Skatteverket - inga postningar",
+          "item4": "Uppföljning av ärendestatus hos myndigheter"
+        },
+        "supportSecurity": {
+          "title": "Support & Säkerhet",
+          "item1": "Obegränsad support via e-post under hela processen",
+          "item2": "End-to-end kryptering av all känslig data",
+          "item3": "Svenska servrar och GDPR-kompatibel datahantering",
+          "item4": "Tillgång för hela familjen - inga extra avgifter"
+        },
+        "valueProposition": {
+          "title": "Jämfört med traditionell juridisk hjälp:",
+          "item1": "Traditionell advokat: 15 000 - 30 000 kr",
+          "item2": "Veyla: 1 999 kr (90% billigare)",
+          "item3": "Tid: Veckor istället för månader",
+          "item4": "Transparent fast pris - inga dolda avgifter"
+        }
+      }
     },
     "reviews": {
       "title": "Förtroende från familjer över hela Sverige",
@@ -103,19 +134,45 @@
       "incubatorLabel": "Startup Inkubator"
     },
     "blog": {
-      "title": "Hjälpsam information",
-      "subtitle": "Läs mer om bouppteckning och juridiska frågor",
+      "meta": {
+        "title": "Blog - Juridiska guider och tips | Veyla",
+        "description": "Läs våra experttips och guider om bouppteckning, dödsbo och juridiska processer. Få hjälp att navigera genom komplexa juridiska frågor.",
+        "keywords": [
+          "bouppteckning guide",
+          "dödsbo tips",
+          "juridisk rådgivning",
+          "skatteverket",
+          "arvskifte"
+        ]
+      },
+      "title": "Juridiska guider & tips",
+      "subtitle": "Experttips och praktiska guider för att hjälpa dig navigera genom bouppteckning och andra juridiska processer",
+      "homeTitle": "Hjälpsam information",
+      "homeSubtitle": "Läs mer om bouppteckning och juridiska frågor",
+      "readMore": "Läs mer",
+      "readArticle": "Läs artikel",
+      "noPostsFound": "Inga blogginlägg hittades.",
+      "ctaTitle": "Behöver du hjälp med bouppteckning?",
+      "ctaDescription": "Låt Veylas AI-system guida dig genom hela processen för endast 1999 kr. Transparent prissättning, juridisk support och direktinlämning till Skatteverket.",
+      "ctaButton": "Starta bouppteckning",
       "article1": {
-        "title": "Guide: Så gör du en bouppteckning steg för steg",
-        "excerpt": "Komplett guide som hjälper dig genom hela processen från start till mål."
+        "title": "Komplett guide: Bouppteckning efter dödsfall - Vad du behöver veta",
+        "excerpt": "En omfattande guide som hjälper dig att förstå processen för bouppteckning efter dödsfall. Lär dig om tidsfrister, dokument och praktiska steg."
       },
       "article2": {
-        "title": "Vanliga misstag vid bouppteckning och hur du undviker dem",
-        "excerpt": "Lär dig om de mest vanliga fällorna och hur du enkelt undviker dem."
+        "title": "Digitala tillgångar i dödsbo - Så hanterar du kryptovalutor och online-konton",
+        "excerpt": "Allt fler lämnar efter sig digitala tillgångar. Lär dig hur du identifierar och hanterar kryptovalutor, online-konton och digitala investeringar i bouppteckningen."
       },
       "article3": {
-        "title": "Juridisk hjälp vs. gör-det-själv: Vad passar dig bäst?",
-        "excerpt": "Jämförelse av olika alternativ för att hjälpa dig välja rätt lösning."
+        "title": "7 vanliga misstag vid bouppteckning - Så undviker du dyra fel",
+        "excerpt": "Lär dig om de vanligaste misstagen som görs vid bouppteckning och hur du undviker dem. Spara tid, pengar och undvik problem med Skatteverket."
+      },
+      "post": {
+        "backToBlog": "Tillbaka till blog",
+        "notFound": "Artikel hittades inte | Veyla Blog",
+        "ctaTitle": "Redo att starta din bouppteckning?",
+        "ctaDescription": "Låt Veylas AI-system guida dig genom hela processen. Transparent prissättning, juridisk support och direktinlämning till Skatteverket för endast 1999 kr.",
+        "relatedArticles": "Relaterade artiklar"
       }
     },
     "footer": {

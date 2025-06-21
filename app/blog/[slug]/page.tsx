@@ -6,35 +6,52 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from "lucide-react";
 import Link from "next/link";
+import { getTranslations, getLocale } from "next-intl/server";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
-  const slugs = getPostSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  // Generate for both languages
+  const svSlugs = getPostSlugs("sv");
+  const enSlugs = getPostSlugs("en");
+
+  return [
+    ...svSlugs.map((slug) => ({ slug })),
+    ...enSlugs.map((slug) => ({ slug })),
+  ];
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("home.blog.post");
+
+  // Try current locale first, then fallback
+  let post = await getPostBySlug(slug, locale);
+  if (!post && locale === "en") {
+    post = await getPostBySlug(slug, "sv");
+  } else if (!post && locale === "sv") {
+    post = await getPostBySlug(slug, "en");
+  }
 
   if (!post) {
     return {
-      title: "Artikel hittades inte | Veyla Blog",
+      title: t("notFound"),
     };
   }
 
   return {
     title: post.seo.metaTitle,
     description: post.seo.metaDescription,
-    keywords: post.seo.keywords,
+    keywords: Array.isArray(post.seo.keywords)
+      ? post.seo.keywords
+      : [post.seo.keywords],
     openGraph: {
       title: post.seo.metaTitle,
       description: post.seo.metaDescription,
@@ -52,14 +69,28 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
+  const locale = await getLocale();
+  const t = await getTranslations("home.blog");
+  const tPost = await getTranslations("home.blog.post");
+
+  // Try current locale first, then fallback
+  let post = await getPostBySlug(slug, locale);
+  let postLocale = locale;
+  if (!post && locale === "en") {
+    post = await getPostBySlug(slug, "sv");
+    postLocale = "sv";
+  } else if (!post && locale === "sv") {
+    post = await getPostBySlug(slug, "en");
+    postLocale = "en";
+  }
 
   if (!post) {
     notFound();
   }
 
   // Get related posts (other recent posts)
-  const allPosts = getAllPosts();
+  const allPosts = getAllPosts(postLocale);
   const relatedPosts = allPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
@@ -70,7 +101,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <Link href='/blog'>
             <Button variant='ghost' className='mb-6'>
               <ArrowLeft className='w-4 h-4 mr-2' />
-              Tillbaka till blog
+              {tPost("backToBlog")}
             </Button>
           </Link>
 
@@ -79,11 +110,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className='flex items-center gap-2'>
                 <Calendar className='w-4 h-4' />
                 <span>
-                  {new Date(post.publishedAt).toLocaleDateString("sv-SE", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {new Date(post.publishedAt).toLocaleDateString(
+                    locale === "sv" ? "sv-SE" : "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
                 </span>
               </div>
               <div className='flex items-center gap-2'>
@@ -127,20 +161,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* CTA Section */}
           <div className='mt-16 p-8 bg-gradient-to-r from-[#0ea47a]/10 to-[#12d39d]/10 rounded-2xl text-center'>
-            <h3 className='text-2xl font-bold mb-4'>
-              Redo att starta din bouppteckning?
-            </h3>
+            <h3 className='text-2xl font-bold mb-4'>{tPost("ctaTitle")}</h3>
             <p className='text-muted-foreground mb-6 max-w-2xl mx-auto'>
-              Låt Veylas AI-system guida dig genom hela processen. Transparent
-              prissättning, juridisk support och direktinlämning till
-              Skatteverket för endast 1999 kr.
+              {tPost("ctaDescription")}
             </p>
             <Link href='/'>
               <Button
                 size='lg'
                 className='bg-[#0ea47a] hover:bg-[#0a7557] text-white'
               >
-                Starta bouppteckning
+                {t("ctaButton")}
                 <ArrowRight className='ml-2 w-5 h-5' />
               </Button>
             </Link>
@@ -154,7 +184,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className='container mx-auto px-4'>
             <div className='max-w-6xl mx-auto'>
               <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center'>
-                Relaterade artiklar
+                {tPost("relatedArticles")}
               </h2>
 
               <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
@@ -170,11 +200,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           <span>
                             {new Date(
                               relatedPost.publishedAt
-                            ).toLocaleDateString("sv-SE", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            })}
+                            ).toLocaleDateString(
+                              locale === "sv" ? "sv-SE" : "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
                           </span>
                           <span>•</span>
                           <span>{relatedPost.readingTime}</span>
@@ -192,7 +225,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             variant='ghost'
                             className='p-0 h-auto text-[#0ea47a] hover:text-[#0a7557] text-sm'
                           >
-                            Läs mer
+                            {t("readMore")}
                             <ArrowRight className='ml-1 w-3 h-3' />
                           </Button>
                         </div>

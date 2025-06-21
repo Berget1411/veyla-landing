@@ -5,28 +5,28 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Blog - Juridiska guider och tips | Veyla",
-  description:
-    "Läs våra experttips och guider om bouppteckning, dödsbo och juridiska processer. Få hjälp att navigera genom komplexa juridiska frågor.",
-  keywords: [
-    "bouppteckning guide",
-    "dödsbo tips",
-    "juridisk rådgivning",
-    "skatteverket",
-    "arvskifte",
-  ],
-  openGraph: {
-    title: "Blog - Juridiska guider och tips | Veyla",
-    description:
-      "Läs våra experttips och guider om bouppteckning, dödsbo och juridiska processer.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("home.blog.meta");
+  const keywords = t.raw("keywords") as string[];
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+  return {
+    title: t("title"),
+    description: t("description"),
+    keywords: keywords,
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      type: "website",
+    },
+  };
+}
+
+export default async function BlogPage() {
+  const t = await getTranslations("home.blog");
+  const locale = await getLocale();
+  const posts = getAllPosts(locale);
 
   return (
     <div className='min-h-screen bg-background'>
@@ -35,12 +35,9 @@ export default function BlogPage() {
         <div className='container mx-auto px-4 py-16'>
           <div className='text-center max-w-3xl mx-auto'>
             <h1 className='text-4xl md:text-5xl font-bold mb-4'>
-              Juridiska guider & tips
+              {t("title")}
             </h1>
-            <p className='text-xl text-muted-foreground'>
-              Experttips och praktiska guider för att hjälpa dig navigera genom
-              bouppteckning och andra juridiska processer
-            </p>
+            <p className='text-xl text-muted-foreground'>{t("subtitle")}</p>
           </div>
         </div>
       </div>
@@ -49,7 +46,7 @@ export default function BlogPage() {
       <div className='container mx-auto px-4 py-16'>
         {posts.length === 0 ? (
           <div className='text-center py-16'>
-            <p className='text-muted-foreground'>Inga blogginlägg hittades.</p>
+            <p className='text-muted-foreground'>{t("noPostsFound")}</p>
           </div>
         ) : (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
@@ -62,7 +59,7 @@ export default function BlogPage() {
                         <Calendar className='w-4 h-4' />
                         <span>
                           {new Date(post.publishedAt).toLocaleDateString(
-                            "sv-SE",
+                            locale === "sv" ? "sv-SE" : "en-US",
                             {
                               year: "numeric",
                               month: "long",
@@ -104,7 +101,7 @@ export default function BlogPage() {
                         variant='ghost'
                         className='p-0 h-auto text-[#0ea47a] hover:text-[#0a7557] group-hover:translate-x-1 transition-transform'
                       >
-                        Läs artikel
+                        {t("readArticle")}
                         <ArrowRight className='ml-2 w-4 h-4' />
                       </Button>
                     </div>
@@ -119,19 +116,17 @@ export default function BlogPage() {
         <div className='mt-20 text-center'>
           <div className='bg-gradient-to-r from-[#0ea47a]/10 to-[#12d39d]/10 rounded-2xl p-8 md:p-12'>
             <h2 className='text-2xl md:text-3xl font-bold mb-4'>
-              Behöver du hjälp med bouppteckning?
+              {t("ctaTitle")}
             </h2>
             <p className='text-muted-foreground text-lg mb-6 max-w-2xl mx-auto'>
-              Låt Veylas AI-system guida dig genom hela processen för endast
-              1999 kr. Transparent prissättning, juridisk support och
-              direktinlämning till Skatteverket.
+              {t("ctaDescription")}
             </p>
             <Link href='/'>
               <Button
                 size='lg'
                 className='bg-[#0ea47a] hover:bg-[#0a7557] text-white'
               >
-                Starta bouppteckning
+                {t("ctaButton")}
                 <ArrowRight className='ml-2 w-5 h-5' />
               </Button>
             </Link>

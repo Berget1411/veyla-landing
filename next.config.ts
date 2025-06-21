@@ -14,14 +14,18 @@ const nextConfig = {
       },
     ],
     formats: ["image/webp", "image/avif"],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 3600, // Increased cache TTL to 1 hour
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
+
+  // Additional optimizations will be handled by Next.js built-in optimizations
 
   // Bundle analyzer can be enabled via environment variable
   ...(process.env.ANALYZE === "true" &&
@@ -31,7 +35,7 @@ const nextConfig = {
 
   // Experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Temporarily disabled due to critters module issue
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -40,7 +44,11 @@ const nextConfig = {
       "@radix-ui/react-select",
       "@radix-ui/react-separator",
       "@radix-ui/react-slot",
+      "@tabler/icons-react",
+      "next-intl",
     ],
+    webpackBuildWorker: true,
+    optimizeServerReact: true,
   },
 
   // Headers for better caching and security
@@ -60,6 +68,19 @@ const nextConfig = {
           {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
+          },
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+        ],
+      },
+      {
+        source: "/(.*)\\.(js|css|woff|woff2|ttf|otf|eot)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

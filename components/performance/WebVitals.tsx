@@ -1,62 +1,56 @@
 "use client";
 
+import { useReportWebVitals } from "next/web-vitals";
 import { useEffect } from "react";
 
+// Extend Window interface for Plausible
+declare global {
+  interface Window {
+    plausible?: (
+      event: string,
+      options?: { props?: Record<string, string | number> }
+    ) => void;
+  }
+}
+
 export function WebVitals() {
-  useEffect(() => {
-    // Simple performance monitoring using native Performance API
-    if (typeof window !== "undefined" && "performance" in window) {
-      // Monitor page load performance
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          // Log performance entries in development
-          if (process.env.NODE_ENV === "development") {
-            console.log("Performance Entry:", {
-              name: entry.name,
-              type: entry.entryType,
-              duration: entry.duration,
-              startTime: entry.startTime,
-            });
-          }
-
-          // Send to analytics if available
-          try {
-            if ("plausible" in window) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (window as any).plausible("Performance Entry", {
-                props: {
-                  entry_type: entry.entryType,
-                  entry_name: entry.name,
-                  duration: Math.round(entry.duration),
-                },
-              });
-            }
-          } catch {
-            // Silently fail
-          }
-        }
-      });
-
-      // Observe different types of performance entries
-      try {
-        observer.observe({
-          entryTypes: ["navigation", "paint", "largest-contentful-paint"],
+  useReportWebVitals((metric) => {
+    // Only report in production and for important metrics
+    if (process.env.NODE_ENV === "production") {
+      // Report to analytics service (Plausible in this case)
+      if (typeof window !== "undefined" && window.plausible) {
+        window.plausible("Web Vitals", {
+          props: {
+            metric_name: metric.name,
+            metric_value: Math.round(metric.value),
+            metric_rating: metric.rating,
+          },
         });
-      } catch {
-        // Fallback for browsers that don't support all entry types
-        try {
-          observer.observe({ entryTypes: ["navigation", "paint"] });
-        } catch {
-          // Silently fail if performance observer is not supported
-        }
       }
 
-      // Cleanup observer on unmount
-      return () => {
-        observer.disconnect();
-      };
+      // Log critical performance issues
+      if (metric.rating === "poor") {
+        console.warn(`Poor ${metric.name} score:`, metric.value);
+      }
+    }
+  });
+
+  // Performance optimizations for development
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      // Preload critical resources
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = "/images/innovation.png";
+      link.as = "image";
+      document.head.appendChild(link);
+
+      // Enable performance monitoring
+      if ("performance" in window && "measure" in window.performance) {
+        window.performance.mark("app-start");
+      }
     }
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 }

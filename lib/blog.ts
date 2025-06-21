@@ -30,10 +30,15 @@ export interface BlogPostPreview {
   readingTime: string;
 }
 
-const postsDirectory = path.join(process.cwd(), "content/blog");
+const contentDirectory = path.join(process.cwd(), "content/blog");
 
-export function getAllPosts(): BlogPostPreview[] {
+function getPostsDirectory(locale: string = "sv"): string {
+  return path.join(contentDirectory, locale);
+}
+
+export function getAllPosts(locale: string = "sv"): BlogPostPreview[] {
   try {
+    const postsDirectory = getPostsDirectory(locale);
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames
       .filter((name) => name.endsWith(".md"))
@@ -68,8 +73,12 @@ export function getAllPosts(): BlogPostPreview[] {
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getPostBySlug(
+  slug: string,
+  locale: string = "sv"
+): Promise<BlogPost | null> {
   try {
+    const postsDirectory = getPostsDirectory(locale);
     const fullPath = path.join(postsDirectory, `${slug}.md`);
 
     if (!fs.existsSync(fullPath)) {
@@ -106,8 +115,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export function getPostSlugs(): string[] {
+export function getPostSlugs(locale: string = "sv"): string[] {
   try {
+    const postsDirectory = getPostsDirectory(locale);
     const fileNames = fs.readdirSync(postsDirectory);
     return fileNames
       .filter((name) => name.endsWith(".md"))
@@ -118,7 +128,10 @@ export function getPostSlugs(): string[] {
   }
 }
 
-export function getFeaturedPosts(limit: number = 3): BlogPostPreview[] {
-  const allPosts = getAllPosts();
+export function getFeaturedPosts(
+  limit: number = 3,
+  locale: string = "sv"
+): BlogPostPreview[] {
+  const allPosts = getAllPosts(locale);
   return allPosts.slice(0, limit);
 }

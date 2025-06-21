@@ -48,7 +48,38 @@
         "Security & privacy – Swedish data, encryption"
       ],
       "ctaSecondary": "Show all included",
-      "guarantee": "BankID login under development"
+      "ctaSecondaryHide": "Hide details",
+      "guarantee": "BankID login under development",
+      "details": {
+        "title": "Complete package - Everything included for 1999 SEK:",
+        "aiExpertise": {
+          "title": "AI-Legal Expertise",
+          "item1": "Personal AI lawyer who analyzes your specific case",
+          "item2": "Tailored recommendations based on your estate",
+          "item3": "Expert help with complex assets (real estate, stocks, foreign assets)"
+        },
+        "documentHandling": {
+          "title": "Document Handling & Submission",
+          "item1": "Automatic completion of all necessary documents (K4, K5, K6)",
+          "item2": "Digital signing with BankID for all heirs",
+          "item3": "Direct submission to the Tax Authority - no mailings",
+          "item4": "Follow-up of case status with authorities"
+        },
+        "supportSecurity": {
+          "title": "Support & Security",
+          "item1": "Unlimited email support throughout the process",
+          "item2": "End-to-end encryption of all sensitive data",
+          "item3": "Swedish servers and GDPR-compliant data handling",
+          "item4": "Access for the whole family - no extra fees"
+        },
+        "valueProposition": {
+          "title": "Compared to traditional legal help:",
+          "item1": "Traditional lawyer: 15,000 - 30,000 SEK",
+          "item2": "Veyla: 1,999 SEK (90% cheaper)",
+          "item3": "Time: Weeks instead of months",
+          "item4": "Transparent fixed price - no hidden fees"
+        }
+      }
     },
     "reviews": {
       "title": "Trust from families across Sweden",
@@ -85,19 +116,45 @@
       "incubatorLabel": "Startup Incubator"
     },
     "blog": {
-      "title": "Helpful information",
-      "subtitle": "Read more about estate inventory and legal questions",
+      "meta": {
+        "title": "Blog - Legal Guides and Tips | Veyla",
+        "description": "Read our expert tips and guides on estate inventory, inheritance, and legal processes. Get help navigating complex legal matters.",
+        "keywords": [
+          "estate inventory guide",
+          "inheritance tips",
+          "legal advice",
+          "tax authority",
+          "probate"
+        ]
+      },
+      "title": "Legal Guides & Tips",
+      "subtitle": "Expert tips and practical guides to help you navigate estate inventory and other legal processes",
+      "homeTitle": "Helpful information",
+      "homeSubtitle": "Read more about estate inventory and legal questions",
+      "readMore": "Read more",
+      "readArticle": "Read article",
+      "noPostsFound": "No blog posts found.",
+      "ctaTitle": "Need help with estate inventory?",
+      "ctaDescription": "Let Veyla's AI system guide you through the entire process for only 1999 SEK. Transparent pricing, legal support and direct submission to the Tax Authority.",
+      "ctaButton": "Start estate inventory",
       "article1": {
-        "title": "Guide: How to do an estate inventory step by step",
-        "excerpt": "Complete guide that helps you through the entire process from start to finish."
+        "title": "Complete Guide: Estate Inventory After Death - What You Need to Know",
+        "excerpt": "A comprehensive guide that helps you understand the estate inventory process after death. Learn about deadlines, documents, and practical steps."
       },
       "article2": {
-        "title": "Common mistakes in estate inventory and how to avoid them",
-        "excerpt": "Learn about the most common pitfalls and how to easily avoid them."
+        "title": "Digital Assets in Estate - How to Handle Cryptocurrencies and Online Accounts",
+        "excerpt": "More and more people are leaving behind digital assets. Learn how to identify and handle cryptocurrencies, online accounts, and digital investments in estate inventories."
       },
       "article3": {
-        "title": "Legal help vs. do-it-yourself: What suits you best?",
-        "excerpt": "Comparison of different options to help you choose the right solution."
+        "title": "7 Common Estate Inventory Mistakes - How to Avoid Costly Errors",
+        "excerpt": "Learn about the most common mistakes made during estate inventories and how to avoid them. Save time, money, and avoid problems with the Tax Authority."
+      },
+      "post": {
+        "backToBlog": "Back to blog",
+        "notFound": "Article not found | Veyla Blog",
+        "ctaTitle": "Ready to start your estate inventory?",
+        "ctaDescription": "Let Veyla's AI system guide you through the entire process. Transparent pricing, legal support and direct submission to the Tax Authority for only 1999 SEK.",
+        "relatedArticles": "Related articles"
       }
     },
     "footer": {
