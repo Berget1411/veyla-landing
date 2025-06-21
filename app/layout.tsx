@@ -66,16 +66,12 @@ export default async function RootLayout({
         <link rel='alternate' hrefLang='en' href='https://veyla.nu/en' />
         <link rel='alternate' hrefLang='x-default' href='https://veyla.nu' />
 
-        {/* Font preloading for better performance */}
+        {/* Font preconnect for better performance */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
           rel='preconnect'
           href='https://fonts.gstatic.com'
           crossOrigin='anonymous'
-        />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap'
-          rel='stylesheet'
         />
 
         {/* Preload critical resources */}
