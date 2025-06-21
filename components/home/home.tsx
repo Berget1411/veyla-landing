@@ -109,7 +109,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [show, setShow] = useState(true);
   const t = useTranslations("home");
-  const { trackNavigation } = useAnalytics();
+  const { trackNavigation, trackPrimaryCTA } = useAnalytics();
 
   const NAVBAR_TABS = [
     {
@@ -244,16 +244,15 @@ function Navbar() {
                 </motion.button>
               ))}
               <div className='px-3 py-2'>
-                <Button
-                  variant='default'
-                  className='w-full bg-[#0ea47a] hover:bg-[#0a7557]'
-                  onClick={() => {
-                    trackNavigation("start-now", "click");
-                    scrollToSection("start-now");
-                  }}
-                >
-                  {t("hero.ctaPrimary")}
-                </Button>
+                <Link href='/start'>
+                  <Button
+                    variant='default'
+                    className='w-full bg-[#0ea47a] hover:bg-[#0a7557]'
+                    onClick={() => trackPrimaryCTA("mobile_nav")}
+                  >
+                    {t("hero.ctaPrimary")}
+                  </Button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -304,17 +303,16 @@ function Hero() {
 
           <div className='max-w-md mx-auto w-full pt-4 flex flex-col gap-4'>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                size='lg'
-                className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
-                onClick={() => {
-                  trackPrimaryCTA("hero");
-                  scrollToSection("start-now");
-                }}
-              >
-                {t("hero.ctaPrimary")}
-                <ArrowRight className='ml-2 h-5 w-5' />
-              </Button>
+              <Link href='/start'>
+                <Button
+                  size='lg'
+                  className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
+                  onClick={() => trackPrimaryCTA("hero")}
+                >
+                  {t("hero.ctaPrimary")}
+                  <ArrowRight className='ml-2 h-5 w-5' />
+                </Button>
+              </Link>
             </motion.div>
             <SignedUp count={127} />
           </div>
@@ -686,14 +684,16 @@ function StartNow() {
           className='max-w-md mx-auto w-full'
         >
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size='lg'
-              className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
-              onClick={() => trackPrimaryCTA("start_now")}
-            >
-              {t("hero.ctaPrimary")}
-              <ArrowRight className='ml-2 h-5 w-5' />
-            </Button>
+            <Link href='/start'>
+              <Button
+                size='lg'
+                className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
+                onClick={() => trackPrimaryCTA("start_now")}
+              >
+                {t("hero.ctaPrimary")}
+                <ArrowRight className='ml-2 h-5 w-5' />
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -847,21 +847,33 @@ function Blog() {
   const t = useTranslations("home");
   const { trackBlogClick } = useAnalytics();
 
+  // Use real blog posts from Markdown files
   const blogPosts = [
     {
-      title: t("blog.article1.title"),
-      excerpt: t("blog.article1.excerpt"),
-      href: "#",
+      title:
+        "Komplett guide: Bouppteckning efter dödsfall - Vad du behöver veta",
+      excerpt:
+        "En omfattande guide som hjälper dig att förstå processen för bouppteckning efter dödsfall. Lär dig om tidsfrister, dokument och praktiska steg.",
+      href: "/blog/guide-bouppteckning-efter-dodsfall",
+      publishedAt: "2024-01-15",
+      readingTime: "8 min",
     },
     {
-      title: t("blog.article2.title"),
-      excerpt: t("blog.article2.excerpt"),
-      href: "#",
+      title:
+        "Digitala tillgångar i dödsbo - Så hanterar du kryptovalutor och online-konton",
+      excerpt:
+        "Allt fler lämnar efter sig digitala tillgångar. Lär dig hur du identifierar och hanterar kryptovalutor, online-konton och digitala investeringar i bouppteckningen.",
+      href: "/blog/digitala-tillgangar-dodsbo",
+      publishedAt: "2024-01-20",
+      readingTime: "6 min",
     },
     {
-      title: t("blog.article3.title"),
-      excerpt: t("blog.article3.excerpt"),
-      href: "#",
+      title: "7 vanliga misstag vid bouppteckning - Så undviker du dyra fel",
+      excerpt:
+        "Lär dig om de vanligaste misstagen som görs vid bouppteckning och hur du undviker dem. Spara tid, pengar och undvik problem med Skatteverket.",
+      href: "/blog/vanliga-misstag-bouppteckning",
+      publishedAt: "2024-01-25",
+      readingTime: "5 min",
     },
   ];
 
@@ -893,30 +905,47 @@ function Blog() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className='group'
             >
-              <Card
-                className='h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer'
-                onClick={() => trackBlogClick(post.title, index + 1)}
-              >
-                <CardHeader>
-                  <CardTitle className='text-lg group-hover:text-[#0ea47a] transition-colors'>
-                    {post.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className='text-muted-foreground text-sm leading-relaxed'>
-                    {post.excerpt}
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    variant='ghost'
-                    className='p-0 h-auto text-[#0ea47a] hover:text-[#0a7557]'
-                  >
-                    Läs mer
-                    <ArrowRight className='ml-1 h-4 w-4' />
-                  </Button>
-                </CardFooter>
-              </Card>
+              <Link href={post.href}>
+                <Card
+                  className='h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer'
+                  onClick={() => trackBlogClick(post.title, index + 1)}
+                >
+                  <CardHeader>
+                    <div className='flex items-center justify-between mb-2'>
+                      <span className='text-xs text-muted-foreground'>
+                        {new Date(post.publishedAt).toLocaleDateString(
+                          "sv-SE",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}
+                      </span>
+                      <span className='text-xs text-muted-foreground'>
+                        {post.readingTime}
+                      </span>
+                    </div>
+                    <CardTitle className='text-lg group-hover:text-[#0ea47a] transition-colors line-clamp-2'>
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className='text-muted-foreground text-sm leading-relaxed line-clamp-3'>
+                      {post.excerpt}
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button
+                      variant='ghost'
+                      className='p-0 h-auto text-[#0ea47a] hover:text-[#0a7557]'
+                    >
+                      Läs mer
+                      <ArrowRight className='ml-1 h-4 w-4' />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
