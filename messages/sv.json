@@ -71,6 +71,24 @@
           "location": "Malmö",
           "review": "Perfekt för mig som inte är så teknikvant. Allt var så enkelt förklarat och jag fick hjälp när jag behövde.",
           "initials": "BI"
+        },
+        {
+          "name": "Erik",
+          "location": "Uppsala",
+          "review": "Fick hjälp med en komplicerad bouppteckning med utländska tillgångar. AI-juristen förstod mitt ärende perfekt och gav skräddarsydda råd.",
+          "initials": "ER"
+        },
+        {
+          "name": "Sofia",
+          "location": "Linköping",
+          "review": "Som ensamstående förälder var jag orolig för kostnaden. 1999 kr var en bråkdel av vad advokater ville ha. Rekommenderar varmt!",
+          "initials": "SO"
+        },
+        {
+          "name": "Lars",
+          "location": "Västerås",
+          "review": "Imponerande teknisk lösning. Hela familjen kunde delta digitalt och vi fick allt klart på en vecka istället för månader.",
+          "initials": "LA"
         }
       ]
     },

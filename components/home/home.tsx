@@ -44,35 +44,35 @@ import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { usePerformance } from "@/hooks/usePerformance";
 import { CookieBanner } from "@/components/ui/cookie-banner";
 
-// People data for animated tooltip
+// People data for animated tooltip - matches testimonials
 const people = [
   {
     id: 1,
-    name: "Anna",
-    designation: "Stockholm",
-    image: "https://i.pravatar.cc/150?u=anna",
-    initials: "AN",
-  },
-  {
-    id: 2,
-    name: "Erik",
+    name: "Maria",
     designation: "Göteborg",
-    image: "https://i.pravatar.cc/150?u=erik",
-    initials: "ER",
-  },
-  {
-    id: 3,
-    name: "Maja",
-    designation: "Malmö",
-    image: "https://i.pravatar.cc/150?u=maja",
+    image: "https://i.pravatar.cc/150?u=maria",
     initials: "MA",
   },
   {
+    id: 2,
+    name: "Anders",
+    designation: "Stockholm",
+    image: "https://i.pravatar.cc/150?u=anders",
+    initials: "AN",
+  },
+  {
+    id: 3,
+    name: "Birgitta",
+    designation: "Malmö",
+    image: "https://i.pravatar.cc/150?u=birgitta",
+    initials: "BI",
+  },
+  {
     id: 4,
-    name: "Lars",
+    name: "Erik",
     designation: "Uppsala",
-    image: "https://i.pravatar.cc/150?u=lars",
-    initials: "LA",
+    image: "https://i.pravatar.cc/150?u=erik",
+    initials: "ER",
   },
   {
     id: 5,
@@ -314,7 +314,7 @@ function Hero() {
                 </Button>
               </Link>
             </motion.div>
-            <SignedUp count={127} />
+            <SignedUp count={247} />
           </div>
         </motion.div>
 
@@ -531,48 +531,128 @@ function Pricing() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className='w-full p-4 bg-gray-50 rounded-lg border'
+                      className='w-full p-6 bg-gradient-to-br from-gray-50 to-emerald-50 rounded-lg border border-emerald-100'
                     >
-                      <h4 className='font-semibold text-sm mb-3'>
-                        Vad som ingår i Veyla Bouppteckning:
+                      <h4 className='font-bold text-base mb-4 text-gray-900'>
+                        Komplett paket - Allt som ingår för 1999 kr:
                       </h4>
-                      <ul className='space-y-2 text-sm text-muted-foreground'>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>
-                            Personlig AI-jurist som analyserar just ditt ärende
+
+                      {/* AI & Juridisk expertis */}
+                      <div className='mb-6'>
+                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+                          <MessageSquare className='h-4 w-4' />
+                          AI-Juridisk Expertis
+                        </h5>
+                        <ul className='space-y-2 text-sm text-gray-700'>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Personlig AI-jurist som analyserar just ditt
+                              ärende
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Skräddarsydda rekommendationer baserat på ditt
+                              dödsbo
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Experthjälp med komplicerade tillgångar
+                              (fastigheter, aktier, utländska tillgångar)
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Dokumenthantering */}
+                      <div className='mb-6'>
+                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+                          <FileText className='h-4 w-4' />
+                          Dokumenthantering & Inlämning
+                        </h5>
+                        <ul className='space-y-2 text-sm text-gray-700'>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Automatisk ifyllning av alla nödvändiga dokument
+                              (K4, K5, K6)
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Digital signering med BankID för alla arvingar
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Direktinlämning till Skatteverket - inga
+                              postningar
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Uppföljning av ärendestatus hos myndigheter
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Support & Säkerhet */}
+                      <div className='mb-6'>
+                        <h5 className='font-semibold text-sm mb-3 text-[#0ea47a] flex items-center gap-2'>
+                          <Shield className='h-4 w-4' />
+                          Support & Säkerhet
+                        </h5>
+                        <ul className='space-y-2 text-sm text-gray-700'>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Obegränsad support via e-post under hela processen
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              End-to-end kryptering av all känslig data
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Svenska servrar och GDPR-kompatibel datahantering
+                            </span>
+                          </li>
+                          <li className='flex items-start gap-2'>
+                            <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
+                            <span>
+                              Tillgång för hela familjen - inga extra avgifter
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Värdeproposition */}
+                      <div className='bg-white p-4 rounded-lg border border-emerald-200'>
+                        <div className='flex items-center gap-2 mb-2'>
+                          <div className='w-2 h-2 bg-[#0ea47a] rounded-full'></div>
+                          <span className='font-semibold text-sm text-gray-900'>
+                            Jämfört med traditionell juridisk hjälp:
                           </span>
-                        </li>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>
-                            Automatisk ifyllning av alla nödvändiga dokument
-                          </span>
-                        </li>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>
-                            Digital signering och direktinlämning till
-                            Skatteverket
-                          </span>
-                        </li>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>
-                            Obegränsad support via e-post under hela processen
-                          </span>
-                        </li>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>Säker hantering med end-to-end kryptering</span>
-                        </li>
-                        <li className='flex items-start gap-2'>
-                          <Check className='h-4 w-4 text-[#0ea47a] mt-0.5 shrink-0' />
-                          <span>
-                            Tillgång för hela familjen - inga extra avgifter
-                          </span>
-                        </li>
-                      </ul>
+                        </div>
+                        <ul className='text-xs text-gray-600 space-y-1'>
+                          <li>• Traditionell advokat: 15 000 - 30 000 kr</li>
+                          <li>• Veyla: 1 999 kr (90% billigare)</li>
+                          <li>• Tid: Veckor istället för månader</li>
+                          <li>• Transparent fast pris - inga dolda avgifter</li>
+                        </ul>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -613,8 +693,9 @@ function Reviews() {
           </p>
         </motion.div>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto'>
-          {reviews.map((review, index) => (
+        {/* First row - 3 testimonials */}
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-8'>
+          {reviews.slice(0, 3).map((review, index) => (
             <motion.div
               key={review.name}
               initial={{ opacity: 0, y: 20 }}
@@ -623,10 +704,10 @@ function Reviews() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className='group'
             >
-              <Card className='h-full relative backdrop-blur-sm overflow-hidden'>
+              <Card className='h-full relative backdrop-blur-sm overflow-hidden hover:shadow-lg transition-shadow duration-300'>
                 <CardContent className='pt-6 h-full flex flex-col'>
                   <div className='space-y-4 flex flex-col h-full'>
-                    <p className='text-muted-foreground italic flex-grow'>
+                    <p className='text-muted-foreground italic flex-grow leading-relaxed'>
                       &quot;{review.review}&quot;
                     </p>
                     <div className='flex items-center gap-4 mt-auto pt-4'>
@@ -648,6 +729,81 @@ function Reviews() {
             </motion.div>
           ))}
         </div>
+
+        {/* Second row - 3 more testimonials */}
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto'>
+          {reviews.slice(3, 6).map((review, index) => (
+            <motion.div
+              key={review.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
+              className='group'
+            >
+              <Card className='h-full relative backdrop-blur-sm overflow-hidden hover:shadow-lg transition-shadow duration-300'>
+                <CardContent className='pt-6 h-full flex flex-col'>
+                  <div className='space-y-4 flex flex-col h-full'>
+                    <p className='text-muted-foreground italic flex-grow leading-relaxed'>
+                      &quot;{review.review}&quot;
+                    </p>
+                    <div className='flex items-center gap-4 mt-auto pt-4'>
+                      <Avatar className='ring-2 ring-[hsl(var(--accent-veyla))] ring-offset-2 ring-offset-background'>
+                        <AvatarFallback className='bg-[hsl(var(--accent-veyla))] text-white'>
+                          {review.initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className='text-left'>
+                        <div className='font-semibold'>{review.name}</div>
+                        <div className='text-sm text-muted-foreground'>
+                          {review.location}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Trust indicators */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className='text-center mt-16'
+        >
+          <div className='flex flex-col sm:flex-row items-center justify-center gap-8 max-w-3xl mx-auto'>
+            <div className='flex items-center gap-2'>
+              <div className='flex -space-x-2'>
+                {people.map((person) => (
+                  <Avatar key={person.id} className='ring-2 ring-white w-8 h-8'>
+                    <AvatarFallback className='bg-[hsl(var(--accent-veyla))] text-white text-xs'>
+                      {person.initials}
+                    </AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <span className='text-sm text-muted-foreground ml-2'>
+                +240 nöjda familjer
+              </span>
+            </div>
+            <div className='flex items-center gap-2'>
+              <div className='flex'>
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className='w-4 h-4 text-yellow-400 fill-current'>
+                    ⭐
+                  </div>
+                ))}
+              </div>
+              <span className='text-sm text-muted-foreground'>
+                4.9/5 genomsnittligt betyg
+              </span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
