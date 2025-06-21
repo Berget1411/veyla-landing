@@ -39,6 +39,9 @@ import scrollToSection from "@/lib/scrollToSection";
 import Link from "next/link";
 import Image from "next/image";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { useAnalytics } from "@/lib/analytics";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { CookieBanner } from "@/components/ui/cookie-banner";
 
 // People data for animated tooltip
 const people = [
@@ -105,6 +108,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [show, setShow] = useState(true);
   const t = useTranslations("home");
+  const { trackNavigation } = useAnalytics();
 
   const NAVBAR_TABS = [
     {
@@ -138,6 +142,7 @@ function Navbar() {
   });
 
   const handleClick = (href: string) => {
+    trackNavigation(href, "click");
     scrollToSection(href);
     setMenuOpen(false);
   };
@@ -179,7 +184,10 @@ function Navbar() {
             {NAVBAR_TABS.map((tab) => (
               <motion.button
                 key={tab.href}
-                onClick={() => scrollToSection(tab.href)}
+                onClick={() => {
+                  trackNavigation(tab.href, "click");
+                  scrollToSection(tab.href);
+                }}
                 whileHover={{ scale: 1.05 }}
                 className='text-sm font-medium transition-colors hover:text-primary'
               >
@@ -238,7 +246,10 @@ function Navbar() {
                 <Button
                   variant='default'
                   className='w-full bg-[#0ea47a] hover:bg-[#0a7557]'
-                  onClick={() => scrollToSection("start-now")}
+                  onClick={() => {
+                    trackNavigation("start-now", "click");
+                    scrollToSection("start-now");
+                  }}
                 >
                   {t("hero.ctaPrimary")}
                 </Button>
@@ -254,6 +265,7 @@ function Navbar() {
 // Hero Component
 function Hero() {
   const t = useTranslations("home");
+  const { trackPrimaryCTA } = useAnalytics();
 
   return (
     <main className='min-h-[100svh] flex flex-col relative'>
@@ -294,7 +306,10 @@ function Hero() {
               <Button
                 size='lg'
                 className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
-                onClick={() => scrollToSection("start-now")}
+                onClick={() => {
+                  trackPrimaryCTA("hero");
+                  scrollToSection("start-now");
+                }}
               >
                 {t("hero.ctaPrimary")}
                 <ArrowRight className='ml-2 h-5 w-5' />
@@ -420,6 +435,7 @@ function HowItWorks() {
 function Pricing() {
   const t = useTranslations("home");
   const [showDetails, setShowDetails] = useState(false);
+  const { trackSecondaryCTA, trackPricingToggle } = useAnalytics();
 
   return (
     <section className='py-24 relative' id='pricing'>
@@ -499,7 +515,12 @@ function Pricing() {
                 <Button
                   variant='outline'
                   className='w-full border-[#0ea47a] text-[#0ea47a] hover:bg-[#0ea47a] hover:text-white'
-                  onClick={() => setShowDetails(!showDetails)}
+                  onClick={() => {
+                    const newState = !showDetails;
+                    setShowDetails(newState);
+                    trackPricingToggle(newState ? "show" : "hide");
+                    trackSecondaryCTA("pricing_details", "pricing_card");
+                  }}
                 >
                   {showDetails ? "Dölj detaljer" : t("pricing.ctaSecondary")}
                 </Button>
@@ -636,6 +657,7 @@ function Reviews() {
 // Start Now Component
 function StartNow() {
   const t = useTranslations("home");
+  const { trackPrimaryCTA } = useAnalytics();
 
   return (
     <section className='py-24 relative' id='start-now'>
@@ -666,6 +688,7 @@ function StartNow() {
             <Button
               size='lg'
               className='w-full bg-[#0ea47a] hover:bg-[#0a7557] text-white px-8 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300'
+              onClick={() => trackPrimaryCTA("start_now")}
             >
               {t("hero.ctaPrimary")}
               <ArrowRight className='ml-2 h-5 w-5' />
@@ -818,6 +841,7 @@ function SupportedBy() {
 // Blog Component
 function Blog() {
   const t = useTranslations("home");
+  const { trackBlogClick } = useAnalytics();
 
   const blogPosts = [
     {
@@ -865,7 +889,10 @@ function Blog() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className='group'
             >
-              <Card className='h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer'>
+              <Card
+                className='h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer'
+                onClick={() => trackBlogClick(post.title, index + 1)}
+              >
                 <CardHeader>
                   <CardTitle className='text-lg group-hover:text-[#0ea47a] transition-colors'>
                     {post.title}
@@ -896,6 +923,9 @@ function Blog() {
 
 // Main Home Component
 export function Home() {
+  // Initialize scroll tracking for secondary KPI
+  useScrollTracking();
+
   return (
     <div>
       <StructuredData />
@@ -909,6 +939,7 @@ export function Home() {
       <StartNow />
       <SupportedBy />
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
