@@ -1,6 +1,130 @@
 {
   "home": {
-    "title": "Home"
+    "title": "Veyla",
+    "hero": {
+      "headline": "Estate inventory digitally – we guide you for 1999 SEK.",
+      "priceNote": "Only 1 999 SEK",
+      "ctaPrimary": "Start estate inventory",
+      "description": "Safe, transparent and cost-effective estate inventory with AI guidance. 10% of traditional cost.",
+      "videoTitle": "Estate Inventory",
+      "videoSubtitle": "Simple, safe and transparent",
+      "signedUpText": "{count} families have already received help!"
+    },
+    "navigation": {
+      "howItWorks": "How it works",
+      "pricing": "Pricing",
+      "about": "About us",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Three simple steps to a completed estate inventory",
+      "step1": {
+        "title": "Answer questions",
+        "description": "Tell us about the situation through our guiding questions"
+      },
+      "step2": {
+        "title": "Get tailored recommendations",
+        "description": "Our AI lawyer analyzes your case and provides personalized advice"
+      },
+      "step3": {
+        "title": "Sign & submit",
+        "description": "Review, sign digitally and submit to the Swedish Tax Agency"
+      }
+    },
+    "pricing": {
+      "title": "Transparent fixed price",
+      "price": "1 999 SEK",
+      "subtitle": "for the whole family",
+      "description": "Everything you need for a complete estate inventory at a fixed price.",
+      "recommended": "Recommended",
+      "productName": "Veyla Estate Inventory",
+      "includes": [
+        "AI lawyer who understands your specific case",
+        "10% of traditional cost",
+        "Transparent fixed price – no hidden fees",
+        "Security & privacy – Swedish data, encryption"
+      ],
+      "ctaSecondary": "Show all included",
+      "guarantee": "BankID login under development"
+    },
+    "reviews": {
+      "title": "Trust from families across Sweden",
+      "subtitle": "See what our customers say about their experience with Veyla.",
+      "testimonials": [
+        {
+          "name": "Maria",
+          "location": "Gothenburg",
+          "review": "Incredibly smooth and easy to use. Saved me both time and money compared to traditional legal help.",
+          "initials": "MA"
+        },
+        {
+          "name": "Anders",
+          "location": "Stockholm",
+          "review": "Transparent pricing and clear guidance throughout the process. I felt secure all the way.",
+          "initials": "AN"
+        },
+        {
+          "name": "Birgitta",
+          "location": "Malmö",
+          "review": "Perfect for me who isn't very tech-savvy. Everything was so simply explained and I got help when I needed it.",
+          "initials": "BI"
+        }
+      ]
+    },
+    "startNow": {
+      "title": "Ready to start?",
+      "subtitle": "Start your estate inventory today and get secure guidance through the entire process."
+    },
+    "supportedBy": {
+      "title": "Supported by",
+      "subtitle": "We are proud to be part of the KTH Innovation ecosystem",
+      "kthDescription": "KTH Innovation supports entrepreneurs and innovators with resources, mentorship and networks to develop tomorrow's technology.",
+      "incubatorLabel": "Startup Incubator"
+    },
+    "blog": {
+      "title": "Helpful information",
+      "subtitle": "Read more about estate inventory and legal questions",
+      "article1": {
+        "title": "Guide: How to do an estate inventory step by step",
+        "excerpt": "Complete guide that helps you through the entire process from start to finish."
+      },
+      "article2": {
+        "title": "Common mistakes in estate inventory and how to avoid them",
+        "excerpt": "Learn about the most common pitfalls and how to easily avoid them."
+      },
+      "article3": {
+        "title": "Legal help vs. do-it-yourself: What suits you best?",
+        "excerpt": "Comparison of different options to help you choose the right solution."
+      }
+    },
+    "footer": {
+      "contact": {
+        "title": "Contact",
+        "email": "support@veyla.se"
+      },
+      "support": {
+        "title": "Supported by",
+        "kth": "KTH Innovation"
+      },
+      "links": {
+        "title": "Links",
+        "privacy": "Privacy",
+        "terms": "Terms of Use",
+        "cookies": "Cookies"
+      },
+      "security": {
+        "title": "Data security & privacy",
+        "points": [
+          "End-to-end encryption of all data",
+          "Swedish servers and data storage",
+          "Collaboration with experienced lawyers",
+          "GDPR-compliant handling"
+        ]
+      },
+      "copyright": "© 2024 Veyla. All rights reserved."
+    }
   },
   "localeSwitcher": {
     "label": "Language",

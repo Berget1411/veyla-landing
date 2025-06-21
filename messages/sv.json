@@ -1,6 +1,130 @@
 {
   "home": {
-    "title": "Hem"
+    "title": "Veyla",
+    "hero": {
+      "headline": "Bouppteckning digitalt – vi guidar dig för 1999kr.",
+      "priceNote": "Endast 1 999 kr",
+      "ctaPrimary": "Starta bouppteckning",
+      "description": "Trygg, transparent och kostnadseffektiv bouppteckning med AI-guidning. 10% av traditionell kostnad.",
+      "videoTitle": "Bouppteckning",
+      "videoSubtitle": "Enkel, trygg och transparent",
+      "signedUpText": "{count} familjer har redan fått hjälp!"
+    },
+    "navigation": {
+      "howItWorks": "Så funkar det",
+      "pricing": "Pris",
+      "about": "Om oss",
+      "openMenu": "Öppna meny",
+      "closeMenu": "Stäng meny"
+    },
+    "howItWorks": {
+      "title": "Så funkar det",
+      "subtitle": "Tre enkla steg till färdig bouppteckning",
+      "step1": {
+        "title": "Svara på frågor",
+        "description": "Berätta om situationen genom våra guidande frågor"
+      },
+      "step2": {
+        "title": "Få skräddarsydda rekommendationer",
+        "description": "Vår AI-jurist analyserar ditt ärende och ger personliga råd"
+      },
+      "step3": {
+        "title": "Signera & skicka in",
+        "description": "Granska, signera digitalt och skicka in till Skatteverket"
+      }
+    },
+    "pricing": {
+      "title": "Transparent fast pris",
+      "price": "1 999 kr",
+      "subtitle": "för hela familjen",
+      "description": "Allt du behöver för en komplett bouppteckning till ett fast pris.",
+      "recommended": "Rekommenderat",
+      "productName": "Veyla Bouppteckning",
+      "includes": [
+        "AI-jurist som förstår just ditt ärende",
+        "10% av traditionell kostnad",
+        "Transparent fast pris – inga dolda avgifter",
+        "Trygghet & sekretess – svensk data, kryptering"
+      ],
+      "ctaSecondary": "Visa allt som ingår",
+      "guarantee": "BankID inloggning under utveckling"
+    },
+    "reviews": {
+      "title": "Förtroende från familjer över hela Sverige",
+      "subtitle": "Se vad våra kunder säger om sin upplevelse med Veyla.",
+      "testimonials": [
+        {
+          "name": "Maria",
+          "location": "Göteborg",
+          "review": "Otroligt smidigt och enkelt att använda. Sparade mig både tid och pengar jämfört med traditionell juridisk hjälp.",
+          "initials": "MA"
+        },
+        {
+          "name": "Anders",
+          "location": "Stockholm",
+          "review": "Transparent pris och tydlig guidning genom hela processen. Kände mig trygg hela vägen.",
+          "initials": "AN"
+        },
+        {
+          "name": "Birgitta",
+          "location": "Malmö",
+          "review": "Perfekt för mig som inte är så teknikvant. Allt var så enkelt förklarat och jag fick hjälp när jag behövde.",
+          "initials": "BI"
+        }
+      ]
+    },
+    "startNow": {
+      "title": "Redo att börja?",
+      "subtitle": "Starta din bouppteckning redan idag och få trygg guidning genom hela processen."
+    },
+    "supportedBy": {
+      "title": "Stöds av",
+      "subtitle": "Vi är stolta över att vara en del av KTH Innovation-ekosystemet",
+      "kthDescription": "KTH Innovation stöttar entreprenörer och innovatörer med resurser, mentorskap och nätverk för att utveckla framtidens teknik.",
+      "incubatorLabel": "Startup Inkubator"
+    },
+    "blog": {
+      "title": "Hjälpsam information",
+      "subtitle": "Läs mer om bouppteckning och juridiska frågor",
+      "article1": {
+        "title": "Guide: Så gör du en bouppteckning steg för steg",
+        "excerpt": "Komplett guide som hjälper dig genom hela processen från start till mål."
+      },
+      "article2": {
+        "title": "Vanliga misstag vid bouppteckning och hur du undviker dem",
+        "excerpt": "Lär dig om de mest vanliga fällorna och hur du enkelt undviker dem."
+      },
+      "article3": {
+        "title": "Juridisk hjälp vs. gör-det-själv: Vad passar dig bäst?",
+        "excerpt": "Jämförelse av olika alternativ för att hjälpa dig välja rätt lösning."
+      }
+    },
+    "footer": {
+      "contact": {
+        "title": "Kontakt",
+        "email": "support@veyla.se"
+      },
+      "support": {
+        "title": "Stöds av",
+        "kth": "KTH Innovation"
+      },
+      "links": {
+        "title": "Länkar",
+        "privacy": "Integritet",
+        "terms": "Användarvillkor",
+        "cookies": "Cookies"
+      },
+      "security": {
+        "title": "Datasäkerhet & sekretess",
+        "points": [
+          "End-to-end kryptering av all data",
+          "Svenska servrar och datalagring",
+          "Samarbete med erfarna jurister",
+          "GDPR-kompatibel hantering"
+        ]
+      },
+      "copyright": "© 2024 Veyla. Alla rättigheter förbehållna."
+    }
   },
   "localeSwitcher": {
     "label": "Språk",
